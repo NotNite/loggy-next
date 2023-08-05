@@ -45,6 +45,7 @@ export default function LogWrapper({ text }: { text: string }) {
           text={text}
           extraLines={1}
           enableSearch
+          caseInsensitive
           height={height}
           ref={log}
         />
