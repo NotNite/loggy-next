@@ -1,3 +1,5 @@
+"use client";
+
 import { ExceptionTroubleshooting } from "@/logs/types";
 import LogWrapper from "./LogWrapper";
 
@@ -8,8 +10,7 @@ export default function ExceptionSection({
 }) {
   if (exception == null) return <></>;
 
-  const whenUTC = new Date(exception.When).toUTCString();
-
+  const whenUTC = new Date(exception.When).toString();
   return (
     <div>
       <h2>Exception</h2>
