@@ -138,3 +138,8 @@ export interface XLTroubleshooting {
   BckMatch: boolean;
   IndexIntegrity: IndexIntegrity;
 }
+
+export type LogUploadResponse = {
+  id: string;
+  initial: string | null;
+};

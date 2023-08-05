@@ -1,4 +1,5 @@
 import { getLogManager } from "@/logs";
+import { LogUploadResponse } from "@/logs/types";
 import crypto from "crypto";
 import JSZip from "jszip";
 
@@ -50,5 +51,10 @@ export async function POST(req: Request) {
     }
   }
 
-  return new Response(id);
+  let response: LogUploadResponse = {
+    id,
+    initial: isNormalLog ? name : null
+  };
+
+  return new Response(JSON.stringify(response));
 }

@@ -2,6 +2,7 @@
 
 import React from "react";
 import styles from "@/styles/styles.module.scss";
+import { LogUploadResponse } from "@/logs/types";
 
 enum LogState {
   Start,
@@ -45,9 +46,12 @@ export default function LogUpload() {
             });
 
             if (req.ok) {
-              const id = await req.text();
+              const resp = (await req.json()) as LogUploadResponse;
               // next redirect brokey
-              window.location.href = `/log/${id}`;
+              window.location.href =
+                resp.initial != null
+                  ? `/log/${resp.id}/${resp.initial}`
+                  : `/log/${resp.id}`;
             } else {
               setState(LogState.Failed);
               return;

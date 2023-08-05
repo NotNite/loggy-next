@@ -7,11 +7,12 @@ import React from "react";
 export default function LogWrapper({ text }: { text: string }) {
   // What the fuck is wrong with you RSC
   const [height, setHeight] = React.useState(0);
+  const [showing, setShowing] = React.useState(true);
+  const log = React.useRef<LazyLog>(null);
+
   React.useEffect(() => {
     setHeight(window.innerHeight);
   }, []);
-
-  const [showing, setShowing] = React.useState(true);
 
   return (
     <>
@@ -22,8 +23,31 @@ export default function LogWrapper({ text }: { text: string }) {
       >
         Toggle log
       </button>
+
+      <button
+        onClick={() => {
+          log.current?.handleScrollToLine(0);
+        }}
+      >
+        Scroll to top
+      </button>
+
+      <button
+        onClick={() => {
+          log.current?.handleScrollToLine(log.current?.state.count ?? 0);
+        }}
+      >
+        Scroll to bottom
+      </button>
+
       {showing && (
-        <LazyLog text={text} extraLines={1} enableSearch height={height} />
+        <LazyLog
+          text={text}
+          extraLines={1}
+          enableSearch
+          height={height}
+          ref={log}
+        />
       )}
     </>
   );
