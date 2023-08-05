@@ -23,13 +23,7 @@ export default function LogWrapper({ text }: { text: string }) {
         Toggle log
       </button>
       {showing && (
-        <LazyLog
-          text={text}
-          extraLines={1}
-          enableSearch
-          enableLinks
-          height={height}
-        />
+        <LazyLog text={text} extraLines={1} enableSearch height={height} />
       )}
     </>
   );
