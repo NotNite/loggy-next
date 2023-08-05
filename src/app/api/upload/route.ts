@@ -19,6 +19,10 @@ export async function POST(req: Request) {
     return new Response("Invalid file type", { status: 400 });
   }
 
+  if (blob.size > 10_000_000) {
+    return new Response("File is too large", { status: 400 });
+  }
+
   const buf = await blob.arrayBuffer();
   const isNormalLog = blob.name.endsWith(".log");
   const id = await crypto.subtle.digest("SHA-256", buf).then((hash) => {
